@@ -105,6 +105,22 @@ pre {
   color: var(--color-selection-fg);
 }
 
+.skip-link {
+  position: fixed;
+  top: var(--space-2xs);
+  left: var(--space-2xs);
+  z-index: var(--z-overlay);
+  padding: var(--space-2xs) var(--space-s);
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 700;
+  translate: 0 -200%;
+}
+
+.skip-link:focus-visible {
+  translate: 0 0;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;

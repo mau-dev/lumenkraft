@@ -1,8 +1,14 @@
+import { Hero } from "@/components/Hero/Hero";
+import { SiteHeader } from "@/components/SiteHeader/SiteHeader";
+import { disciplines, navigation, profile } from "@/content";
+
 export default function Home() {
   return (
-    <main>
-      <h1>LumenKraft</h1>
-      <p>Homepage in progress.</p>
-    </main>
+    <>
+      <SiteHeader brand={profile.brand} items={navigation} />
+      <main id="main">
+        <Hero brand={profile.brand} principle={profile.principle} disciplines={disciplines} />
+      </main>
+    </>
   );
 }

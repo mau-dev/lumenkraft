@@ -30,7 +30,7 @@ const spaceScale = ["--space-3xs", "--space-2xs", "--space-xs", "--space-s", "--
 
 export default function StyleguidePage() {
   return (
-    <main className={styles.page}>
+    <main id="main" className={styles.page}>
       <header className={styles.header}>
         <p className={styles.meta}>Design system / v0.1 / internal</p>
         <h1 className={styles.title}>
