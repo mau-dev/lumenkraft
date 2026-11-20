@@ -31,5 +31,10 @@ Then open [http://localhost:3000](http://localhost:3000).
 
 ```
 src/
-  app/        Routes, layouts and pages (Next.js App Router)
+  app/              Routes, layouts and pages (Next.js App Router)
+    fonts.ts        Font loading (Fraunces, Bricolage Grotesque, JetBrains Mono)
+    styleguide/     Internal design-system preview at /styleguide
+  styles/
+    tokens.css      Design tokens: colour, type, space, layout, motion
+    base.css        Reset, base typography, focus and reduced-motion styles
 ```

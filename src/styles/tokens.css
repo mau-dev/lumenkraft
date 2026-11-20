@@ -1,0 +1,99 @@
+/*
+ * LumenKraft design tokens.
+ *
+ * Colour pairing rules (WCAG contrast, checked):
+ *   ink on paper 15.4   — default text
+ *   paper on blue 5.4   — blue surfaces use paper text; blue is also the only
+ *                          accent safe for small text on paper
+ *   ink on orange 5.2   — orange is a surface colour, never text on paper (2.9)
+ *   ink on yellow 14.2
+ *   ink on lavender 7.9
+ *   ink on coral 7.2    — coral and lavender are never text on paper
+ */
+
+:root {
+  /* Palette */
+  --paper: #f3f0e9;
+  --ink: #191919;
+  --orange: #f15a35;
+  --blue: #3657ce;
+  --yellow: #e5f05a;
+  --lavender: #b6a6d9;
+  --coral: #f08a79;
+
+  /* Semantic colours */
+  --color-bg: var(--paper);
+  --color-fg: var(--ink);
+  --color-accent: var(--blue);
+  --color-focus: var(--blue);
+  --color-selection-bg: var(--yellow);
+  --color-selection-fg: var(--ink);
+  --color-rule: var(--ink);
+
+  /* Font families (variables are set by next/font in src/app/fonts.ts) */
+  --font-display: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
+  --font-sans: var(--font-bricolage), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Type scale — fluid between ~375px and ~1600px viewports */
+  --text-mono: clamp(0.75rem, 0.72rem + 0.12vw, 0.8125rem);
+  --text-sm: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
+  --text-base: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  --text-lg: clamp(1.25rem, 1.14rem + 0.45vw, 1.5rem);
+  --text-xl: clamp(1.5rem, 1.27rem + 1vw, 2.25rem);
+  --text-2xl: clamp(2rem, 1.5rem + 2.2vw, 3.75rem);
+  --text-3xl: clamp(2.75rem, 1.8rem + 4.2vw, 6rem);
+  --text-display: clamp(3.5rem, 1.6rem + 9vw, 11rem);
+  --text-mega: clamp(3.5rem, 0.5rem + 16vw, 18rem);
+
+  --leading-tight: 0.88;
+  --leading-snug: 1.1;
+  --leading-body: 1.5;
+
+  --tracking-display: -0.035em;
+  --tracking-mono: 0.04em;
+
+  /* Spacing — fluid scale */
+  --space-3xs: clamp(0.25rem, 0.23rem + 0.1vw, 0.3125rem);
+  --space-2xs: clamp(0.5rem, 0.47rem + 0.12vw, 0.5625rem);
+  --space-xs: clamp(0.75rem, 0.7rem + 0.2vw, 0.875rem);
+  --space-s: clamp(1rem, 0.95rem + 0.25vw, 1.1875rem);
+  --space-m: clamp(1.5rem, 1.42rem + 0.35vw, 1.75rem);
+  --space-l: clamp(2rem, 1.85rem + 0.6vw, 2.375rem);
+  --space-xl: clamp(3rem, 2.75rem + 1vw, 3.5rem);
+  --space-2xl: clamp(4rem, 3.4rem + 2.5vw, 6rem);
+  --space-3xl: clamp(6rem, 4.8rem + 5vw, 10rem);
+
+  /* Layout */
+  --page-margin: clamp(1rem, 0.5rem + 2.4vw, 2.5rem);
+  --grid-columns: 12;
+  --grid-gutter: clamp(0.75rem, 0.5rem + 1vw, 1.5rem);
+  --content-max: 100rem;
+  --measure: 62ch;
+
+  /* Borders and radii — sharp by default; pills reserved for tags and buttons */
+  --rule-width: 1.5px;
+  --radius-pill: 999px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 160ms;
+  --duration-base: 320ms;
+  --duration-slow: 700ms;
+
+  /* Layering */
+  --z-base: 0;
+  --z-raised: 10;
+  --z-nav: 100;
+  --z-overlay: 1000;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+    --duration-slow: 0ms;
+  }
+}
