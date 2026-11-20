@@ -1,0 +1,13 @@
+# Private AI working instructions
+AGENTS.md
+
+# Dependencies and build output
+node_modules/
+.next/
+out/
+
+# Environment variables and secrets
+.env*
+
+# OS files
+.DS_Store
