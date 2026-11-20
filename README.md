@@ -34,6 +34,10 @@ src/
   app/              Routes, layouts and pages (Next.js App Router)
     fonts.ts        Font loading (Fraunces, Bricolage Grotesque, JetBrains Mono)
     styleguide/     Internal design-system preview at /styleguide
+  content/          Site content as typed data — edit these to change text
+    profile.ts      Name, intro, principle, socials, navigation
+    disciplines.ts  The six areas of practice
+    projects.ts     Projects (drafts show in development only)
   styles/
     tokens.css      Design tokens: colour, type, space, layout, motion
     base.css        Reset, base typography, focus and reduced-motion styles
