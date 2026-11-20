@@ -32,6 +32,7 @@ html {
 
 body {
   min-height: 100svh;
+  overflow-x: clip;
   background: var(--color-bg);
   color: var(--color-fg);
   font-family: var(--font-sans);
@@ -131,4 +132,29 @@ pre {
   clip-path: inset(50%);
   white-space: nowrap;
   border: 0;
+}
+
+/* View transitions: project covers morph between the homepage and case studies */
+
+::view-transition {
+  pointer-events: none;
+}
+
+::view-transition-group(.morph) {
+  animation-duration: 560ms;
+  animation-timing-function: var(--ease-out);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 280ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
 }

@@ -1,0 +1,104 @@
+.cover {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: var(--space-s);
+  overflow: hidden;
+  background: var(--accent);
+  color: var(--on-accent);
+  container-type: inline-size;
+}
+
+.hero {
+  min-height: clamp(20rem, 62vh, 44rem);
+  padding: var(--space-m) var(--page-margin);
+}
+
+.number {
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+.title {
+  position: relative;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 18cqi, 9rem);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+}
+
+.hero .title {
+  font-size: clamp(3.5rem, 15cqi, 16rem);
+}
+
+.title :is(h1, h2, h3) {
+  font: inherit;
+  letter-spacing: inherit;
+}
+
+.shape {
+  position: absolute;
+  fill: var(--paper);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+  transition:
+    rotate var(--duration-slow) var(--ease-spring),
+    translate var(--duration-slow) var(--ease-spring),
+    scale var(--duration-slow) var(--ease-spring);
+}
+
+/* Composition 0: big circle + square */
+.v0 .s0 { width: 62%; top: -14%; right: -12%; }
+.v0 .s1 { width: 18%; top: 12%; left: 30%; fill: var(--ink); rotate: 12deg; }
+
+/* Composition 1: half-circle, flower, spark */
+.v1 .s0 { width: 70%; bottom: -26%; right: -8%; }
+.v1 .s1 { width: 26%; top: 8%; right: 10%; fill: var(--yellow); }
+.v1 .s2 { width: 14%; top: 10%; left: 34%; fill: var(--ink); }
+
+/* Composition 2: triangle, circle, square */
+.v2 .s0 { width: 48%; top: -6%; right: 4%; rotate: 8deg; }
+.v2 .s1 { width: 30%; bottom: -10%; right: -6%; fill: var(--yellow); }
+.v2 .s2 { width: 14%; top: 12%; left: 30%; fill: var(--ink); rotate: -10deg; }
+
+/* Wide hero covers: keep shapes from growing huge */
+.hero .s0 { width: min(52%, 38rem); }
+.hero.v1 .s1,
+.hero.v2 .s1 { width: min(22%, 16rem); }
+.hero .s2,
+.hero.v0 .s1 { width: min(10%, 8rem); }
+
+/* Shapes rearrange when the surrounding panel is hovered */
+:global([data-cover-hover]):hover .v0 .s0 { translate: -8% 10%; }
+:global([data-cover-hover]):hover .v0 .s1 { rotate: 102deg; scale: 1.2; }
+:global([data-cover-hover]):hover .v1 .s0 { rotate: 180deg; translate: 0 -20%; }
+:global([data-cover-hover]):hover .v1 .s1 { rotate: 90deg; scale: 1.25; }
+:global([data-cover-hover]):hover .v1 .s2 { rotate: 45deg; }
+:global([data-cover-hover]):hover .v2 .s0 { rotate: 188deg; }
+:global([data-cover-hover]):hover .v2 .s1 { translate: 40% -30%; }
+:global([data-cover-hover]):hover .v2 .s2 { rotate: 35deg; scale: 0.7; }
+
+/* On the case-study hero, shapes drift slowly by themselves */
+@media (prefers-reduced-motion: no-preference) {
+  .hero .shape {
+    animation: drift 14s var(--ease-in-out) infinite alternate;
+  }
+
+  .hero .s1 {
+    animation-duration: 11s;
+    animation-direction: alternate-reverse;
+  }
+
+  @keyframes drift {
+    to {
+      translate: -4% 6%;
+      rotate: 24deg;
+    }
+  }
+}

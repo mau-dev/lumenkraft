@@ -1,0 +1,186 @@
+.frame {
+  overflow: hidden;
+  border: var(--rule-width) solid var(--ink);
+  border-radius: 0.9rem;
+  background: var(--paper);
+  box-shadow: 0.6rem 0.6rem 0 var(--ink);
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+  padding: 0.55rem var(--space-s);
+  border-bottom: var(--rule-width) solid var(--ink);
+  background: var(--paper);
+}
+
+.controls {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.control {
+  width: 0.8rem;
+  height: 0.8rem;
+  fill: var(--paper);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.control:nth-child(1) { fill: var(--orange); }
+.control:nth-child(2) { fill: var(--yellow); }
+.control:nth-child(3) { fill: var(--blue); }
+
+.address {
+  flex: 1;
+  max-width: 28rem;
+  margin-inline: auto;
+  padding: 0.15rem 0.8rem;
+  overflow: hidden;
+  border: 1px solid var(--ink);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.viewport {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--ink);
+  container-type: size;
+}
+
+/* Scroll: one tall screenshot glides down and back up */
+
+.scroller {
+  position: absolute;
+  inset: 0;
+}
+
+.tall {
+  width: 100%;
+  height: auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tall {
+    animation: browse var(--scroll-duration, 24s) var(--ease-in-out) infinite alternate;
+  }
+
+  .scroller:hover .tall {
+    animation-play-state: paused;
+  }
+
+  @keyframes browse {
+    0%,
+    8% {
+      translate: 0 0;
+    }
+
+    92%,
+    100% {
+      translate: 0 calc(-100% + 100cqh);
+    }
+  }
+}
+
+/* With reduced motion the visitor scrolls the screenshot themselves */
+@media (prefers-reduced-motion: reduce) {
+  .scroller {
+    overflow-y: auto;
+  }
+}
+
+/* Slides: screenshots page through, each with a slow drift */
+
+.slides {
+  position: absolute;
+  inset: 0;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  translate: 6% 0;
+  transition:
+    opacity var(--duration-slow) var(--ease-out),
+    translate var(--duration-slow) var(--ease-out);
+}
+
+.slide[data-active="true"] {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.slideImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .slide[data-active="true"] .slideImage {
+    animation: drift 4.2s linear both;
+  }
+
+  @keyframes drift {
+    from {
+      scale: 1.06;
+      translate: 0 -2%;
+    }
+  }
+}
+
+.dots {
+  position: absolute;
+  right: var(--space-s);
+  bottom: var(--space-s);
+  display: flex;
+  padding: 0 0.25rem;
+  border: 1px solid var(--ink);
+  border-radius: var(--radius-pill);
+  background: var(--paper);
+}
+
+/* A 24px tap target around a small dot */
+.dot {
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.dot::before {
+  content: "";
+  width: 0.7rem;
+  height: 0.7rem;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    scale var(--duration-fast) var(--ease-out);
+}
+
+.dot[aria-pressed="true"]::before {
+  background: var(--ink);
+  scale: 1.2;
+}
+
+/* Video */
+
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

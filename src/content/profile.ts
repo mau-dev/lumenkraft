@@ -3,12 +3,13 @@ import type { NavItem, Profile } from "./types";
 
 export const profile: Profile = {
   brand: "LumenKraft",
-  name: placeholder("Your name as it should appear on the site"),
+  name: "Maria",
   tagline: placeholder("One line on what LumenKraft is"),
-  intro: placeholder(
-    "Two or three sentences introducing you and how code, design, sound and movement connect in your work.",
-  ),
+  // Drawn from the project brief. Rewrite it in your own voice whenever you like.
+  intro:
+    "LumenKraft is the creative practice of a multidisciplinary creator working across software, design, electronic music, movement, workshops and independent experiments — driven by curiosity, and built with care.",
   principle: "Create from the soul. Craft with intention.",
+  location: "Sydney — Northern Beaches",
   email: undefined,
   socials: [{ label: "GitHub", href: "https://github.com/mau-dev" }],
 };

@@ -4,14 +4,16 @@ import styles from "./SiteHeader.module.css";
 
 type SiteHeaderProps = {
   brand: string;
+  byline?: string;
   items: NavItem[];
 };
 
-export function SiteHeader({ brand, items }: SiteHeaderProps) {
+export function SiteHeader({ brand, byline, items }: SiteHeaderProps) {
   return (
     <header className={styles.header}>
       <Link href="/" className={styles.brand}>
-        {brand}
+        <span className={styles.brandName}>{brand}</span>
+        {byline && <span className={styles.byline}>{byline}</span>}
       </Link>
       <nav aria-label="Main">
         <ol className={styles.list}>

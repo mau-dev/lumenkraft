@@ -1,0 +1,88 @@
+.marquee {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: clamp(16rem, 30vw, 28rem);
+  overflow: clip;
+}
+
+.tape {
+  grid-area: 1 / 1;
+  justify-self: center;
+  width: 130vw;
+  padding-block: var(--space-xs);
+  border-block: var(--rule-width) solid var(--ink);
+  overflow: hidden;
+}
+
+.yellow {
+  background: var(--yellow);
+  color: var(--ink);
+  rotate: -6deg;
+}
+
+.ink {
+  background: var(--ink);
+  color: var(--paper);
+  rotate: 5deg;
+}
+
+.row {
+  display: flex;
+  width: max-content;
+  animation: slide 48s linear infinite;
+}
+
+.ink .row {
+  animation-direction: reverse;
+  animation-duration: 56s;
+}
+
+.marquee:hover .row {
+  animation-play-state: paused;
+}
+
+@keyframes slide {
+  to {
+    translate: -50% 0;
+  }
+}
+
+.half {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-m);
+  padding-inline: var(--space-m) 0;
+  font-size: var(--text-2xl);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.caps {
+  font-weight: 800;
+  font-stretch: 75%;
+  text-transform: uppercase;
+}
+
+.italic {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+}
+
+.shape {
+  width: 0.8em;
+  height: 0.8em;
+  fill: currentColor;
+}
+
+.ink .item:nth-child(3n + 1) .shape { fill: var(--orange); }
+.ink .item:nth-child(3n + 2) .shape { fill: var(--lavender); }
+.yellow .item:nth-child(2n) .shape { fill: var(--blue); }

@@ -31,7 +31,9 @@ export function Hero({ brand, principle, disciplines }: HeroProps) {
       </p>
 
       <div className={styles.stage}>
-        <HeroLight />
+        <div className={styles.orbit}>
+          <HeroLight />
+        </div>
 
         <h1 id="hero-title" className={styles.wordmark}>
           <span className="visually-hidden">{brand}</span>

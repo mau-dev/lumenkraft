@@ -1,0 +1,195 @@
+.practice {
+  padding: var(--space-3xl) var(--page-margin) var(--space-2xl);
+  border-top: var(--rule-width) solid var(--ink);
+}
+
+.header {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--space-s) var(--grid-gutter);
+  align-items: end;
+  margin-bottom: var(--space-xl);
+}
+
+.kicker {
+  grid-column: 1 / -1;
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+}
+
+.heading {
+  grid-column: 1 / span 8;
+  font-size: var(--text-display);
+  font-weight: 900;
+  line-height: 0.88;
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+}
+
+.heading span {
+  display: block;
+}
+
+.heading span:nth-child(2) {
+  padding-left: 1.2em;
+  font-style: italic;
+  font-weight: 300;
+}
+
+.intro {
+  grid-column: 9 / -1;
+  max-width: 28ch;
+  font-size: var(--text-lg);
+  line-height: var(--leading-snug);
+}
+
+/* Ruled grid */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: var(--rule-width) solid var(--ink);
+  border-left: var(--rule-width) solid var(--ink);
+}
+
+.cell {
+  --shape-fill: var(--accent);
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: var(--space-2xs);
+  min-height: clamp(17rem, 30vw, 28rem);
+  padding: var(--space-s);
+  overflow: hidden;
+  border-right: var(--rule-width) solid var(--ink);
+  border-bottom: var(--rule-width) solid var(--ink);
+  transition:
+    background var(--duration-base) var(--ease-out),
+    color var(--duration-base) var(--ease-out);
+}
+
+.cell:nth-child(1) { grid-column: span 7; }
+.cell:nth-child(2) { grid-column: span 5; }
+.cell:nth-child(3) { grid-column: span 4; }
+.cell:nth-child(4) { grid-column: span 8; }
+.cell:nth-child(5) { grid-column: span 5; }
+.cell:nth-child(6) { grid-column: span 7; }
+
+.cell:hover {
+  --shape-fill: var(--on-accent);
+
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.index {
+  position: absolute;
+  top: var(--space-s);
+  left: var(--space-s);
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+}
+
+.label {
+  position: relative;
+  font-size: var(--text-3xl);
+  font-weight: 800;
+  line-height: 0.9;
+}
+
+.cell:nth-child(odd) .label {
+  font-style: italic;
+  font-weight: 300;
+}
+
+.description {
+  position: relative;
+  max-width: 30ch;
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* Shapes: positioned differently per cell, transformed on hover */
+
+.shapeWrap {
+  position: absolute;
+  width: clamp(9rem, 22vw, 19rem);
+  aspect-ratio: 1;
+}
+
+.cell:nth-child(1) .shapeWrap { top: 8%; right: 8%; }
+.cell:nth-child(2) .shapeWrap { top: -12%; right: -10%; width: clamp(10rem, 26vw, 22rem); }
+.cell:nth-child(3) .shapeWrap { top: 10%; right: 10%; width: clamp(7rem, 14vw, 13rem); }
+.cell:nth-child(4) .shapeWrap { top: 50%; right: 6%; translate: 0 -50%; width: clamp(10rem, 26vw, 24rem); }
+.cell:nth-child(5) .shapeWrap { top: 8%; right: 12%; }
+.cell:nth-child(6) .shapeWrap { bottom: -18%; right: -4%; width: clamp(10rem, 28vw, 24rem); }
+
+.shape {
+  width: 100%;
+  height: 100%;
+  fill: var(--shape-fill);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+  transition:
+    transform var(--duration-slow) var(--ease-spring),
+    fill var(--duration-base) var(--ease-out);
+}
+
+.cell:hover [data-shape="square"] { transform: rotate(45deg) scale(0.78); }
+.cell:hover [data-shape="semicircle"] { transform: rotate(180deg); }
+.cell:hover [data-shape="spark"] { transform: rotate(135deg) scale(1.2); }
+.cell:hover [data-shape="circle"] { transform: scale(1.12, 0.72); }
+.cell:hover [data-shape="triangle"] { transform: rotate(180deg) scale(0.9); }
+.cell:hover [data-shape="flower"] { transform: rotate(67.5deg) scale(1.1); }
+
+/* Scroll-driven: shapes turn slowly as their cell passes through the viewport */
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .shapeWrap {
+      animation: turn linear both;
+      animation-timeline: view();
+    }
+
+    .cell:nth-child(even) .shapeWrap {
+      animation-direction: reverse;
+    }
+
+    @keyframes turn {
+      from {
+        rotate: -30deg;
+      }
+
+      to {
+        rotate: 30deg;
+      }
+    }
+  }
+}
+
+/* Small screens */
+
+@media (max-width: 48rem) {
+  .heading,
+  .intro {
+    grid-column: 1 / -1;
+  }
+
+  .cell:nth-child(n) {
+    grid-column: 1 / -1;
+    min-height: 15rem;
+  }
+
+  .cell:nth-child(n) .shapeWrap {
+    width: 9rem;
+  }
+}

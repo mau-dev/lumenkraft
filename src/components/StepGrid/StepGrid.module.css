@@ -1,0 +1,82 @@
+.machine {
+  --bar: 2s; /* one bar of 16 steps at 120 BPM */
+
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 4cqh 4cqw;
+  background: var(--ink);
+}
+
+.grid {
+  --cell: min(4.4cqw, 8.2cqh);
+
+  display: grid;
+  gap: 1.1cqh;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 9cqw repeat(var(--steps), var(--cell));
+  align-items: center;
+  gap: 0.8cqw;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: clamp(0.5rem, 1.6cqw, 0.8rem);
+  color: var(--paper);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.cell {
+  width: var(--cell);
+  height: var(--cell);
+  border-radius: 18%;
+  background: #2c2c2c;
+}
+
+.cell[data-beat="true"] {
+  background: #3a3a3a;
+}
+
+.row:nth-child(4n + 1) .cell[data-active="true"] { background: var(--orange); }
+.row:nth-child(4n + 2) .cell[data-active="true"] { background: var(--lavender); }
+.row:nth-child(4n + 3) .cell[data-active="true"] { background: var(--coral); }
+.row:nth-child(4n + 4) .cell[data-active="true"] { background: var(--blue); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .cell {
+    animation: sweep var(--bar) linear infinite;
+    animation-delay: calc(var(--step) * var(--bar) / var(--steps));
+  }
+
+  .cell[data-active="true"] {
+    animation-name: hit;
+  }
+
+  @keyframes sweep {
+    0%,
+    6% {
+      filter: brightness(1.9);
+    }
+
+    7%,
+    100% {
+      filter: brightness(1);
+    }
+  }
+
+  @keyframes hit {
+    0% {
+      background: var(--yellow);
+      scale: 1.18;
+    }
+
+    12% {
+      scale: 1;
+    }
+  }
+}

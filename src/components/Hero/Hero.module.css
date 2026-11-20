@@ -88,6 +88,13 @@
   }
 }
 
+.orbit {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transform-origin: 55% 50%;
+}
+
 /* Stickers: discipline labels scattered around the wordmark */
 
 .stickers {
@@ -189,5 +196,73 @@
 @media (max-width: 22.5rem) {
   .hero {
     padding-top: calc(var(--space-3xl) + var(--space-xl));
+  }
+}
+
+/* Scroll-driven exit: the wordmark pulls apart, the light grows, stickers float off */
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero {
+      view-timeline: --hero block;
+    }
+
+    .first,
+    .second {
+      animation:
+        rise var(--duration-slow) var(--ease-out) both,
+        apart linear both;
+      animation-timeline: auto, --hero;
+      animation-range: normal, exit 0% exit 100%;
+    }
+
+    .second {
+      animation-delay: 90ms, 0s;
+      --direction: 1;
+    }
+
+    .first {
+      --direction: -1;
+    }
+
+    @keyframes apart {
+      to {
+        translate: calc(var(--direction) * 18vw) 0;
+      }
+    }
+
+    .orbit {
+      animation: swell linear both;
+      animation-timeline: --hero;
+      animation-range: exit 0% exit 100%;
+    }
+
+    @keyframes swell {
+      to {
+        scale: 1.8;
+      }
+    }
+
+    .sticker {
+      animation: float linear both;
+      animation-timeline: --hero;
+      animation-range: exit 0% exit 100%;
+    }
+
+    .sticker:nth-child(odd) {
+      --lift: -38vh;
+      --spin: -40deg;
+    }
+
+    .sticker:nth-child(even) {
+      --lift: -22vh;
+      --spin: 30deg;
+    }
+
+    @keyframes float {
+      to {
+        transform: translateY(var(--lift)) rotate(var(--spin));
+      }
+    }
   }
 }
